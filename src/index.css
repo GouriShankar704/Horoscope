@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 20% 4%;
+    --foreground: 270 20% 95%;
+
+    --card: 260 25% 8%;
+    --card-foreground: 270 20% 95%;
+
+    --popover: 260 25% 6%;
+    --popover-foreground: 270 20% 95%;
+
+    --primary: 270 50% 45%;
+    --primary-foreground: 270 20% 98%;
+
+    --secondary: 270 30% 15%;
+    --secondary-foreground: 270 20% 90%;
+
+    --muted: 260 20% 12%;
+    --muted-foreground: 270 15% 60%;
+
+    --accent: 270 60% 60%;
+    --accent-foreground: 270 20% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 270 20% 18%;
+    --input: 270 20% 15%;
+    --ring: 270 60% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom mystical colors */
+    --mystic-purple: 270 50% 45%;
+    --mystic-violet: 270 60% 60%;
+    --mystic-glow: 270 70% 70%;
+    --cosmic-dark: 260 30% 6%;
+    --star-white: 270 20% 95%;
+
+    /* Gradients */
+    --gradient-mystic: linear-gradient(135deg, hsl(270 50% 45%) 0%, hsl(280 60% 55%) 50%, hsl(260 50% 40%) 100%);
+    --gradient-cosmic: linear-gradient(180deg, hsl(260 30% 6%) 0%, hsl(270 25% 10%) 50%, hsl(260 30% 6%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(270 70% 65%) 0%, hsl(280 60% 50%) 100%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(270 60% 50% / 0.4);
+    --shadow-mystic: 0 8px 32px hsl(270 50% 30% / 0.3);
+    --shadow-card: 0 4px 24px hsl(260 30% 5% / 0.5);
+
+    --sidebar-background: 260 25% 8%;
+    --sidebar-foreground: 270 20% 90%;
+    --sidebar-primary: 270 50% 45%;
+    --sidebar-primary-foreground: 270 20% 98%;
+    --sidebar-accent: 270 30% 15%;
+    --sidebar-accent-foreground: 270 20% 90%;
+    --sidebar-border: 270 20% 18%;
+    --sidebar-ring: 270 60% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(270 70% 70%) 0%, hsl(280 60% 80%) 50%, hsl(270 60% 65%) 100%);
+  }
+
+  .glow-button {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 30px hsl(270 60% 50% / 0.5), inset 0 1px 0 hsl(270 70% 70% / 0.3);
+  }
+
+  .glow-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(270 70% 60% / 0.3) 0%, transparent 50%);
+  }
+
+  .glow-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 50px hsl(270 60% 50% / 0.7), 0 0 80px hsl(270 60% 50% / 0.3), inset 0 1px 0 hsl(270 70% 70% / 0.5);
+  }
+
+  .cosmic-card {
+    @apply relative overflow-hidden rounded-xl;
+    background: linear-gradient(135deg, hsl(270 25% 12% / 0.8) 0%, hsl(260 30% 8% / 0.9) 100%);
+    border: 1px solid hsl(270 30% 25% / 0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .cosmic-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-50;
+    background: radial-gradient(ellipse at top, hsl(270 40% 30% / 0.2) 0%, transparent 70%);
+  }
+
+  .starfield {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(270 20% 80%), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(270 30% 85%), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(280 20% 90%), transparent),
+      radial-gradient(2px 2px at 130px 80px, hsl(270 25% 85%), transparent),
+      radial-gradient(1px 1px at 160px 120px, hsl(270 20% 80%), transparent),
+      radial-gradient(2px 2px at 200px 50px, hsl(280 30% 85%), transparent),
+      radial-gradient(1px 1px at 250px 160px, hsl(270 25% 90%), transparent),
+      radial-gradient(2px 2px at 300px 100px, hsl(270 20% 85%), transparent);
+    background-size: 350px 200px;
+    animation: twinkle 8s ease-in-out infinite;
+  }
+
+  .section-fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 30px hsl(270 60% 50% / 0.5); }
+  50% { box-shadow: 0 0 50px hsl(270 60% 50% / 0.8); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
